@@ -22,7 +22,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get("/api/article/:id", async (req, res) => {
+app.get("/api/article/:name", async (req, res) => {
  
   const { id } = req.params;
   try {
@@ -34,7 +34,6 @@ app.get("/api/article/:id", async (req, res) => {
 });
 
 app.post("/api/article/:name/upvotes", (req, res) => {
-  
   const { name } = req.params;
   const filter = { name: name };
   const update = { $inc: { upvotes: 1 } };
