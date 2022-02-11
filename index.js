@@ -30,6 +30,8 @@ app.get("/api/article/:id", async (req, res) => {
 });
 
 app.post("/api/article/:name/upvotes", (req, res) => {
+  res.header("Access-Control-Allow-Origin","*");
+  res.header("Access-Control-Allow-Methods:GET , POST ,PUT , DELETE",);
   const { name } = req.params;
   const filter = { name: name };
   const update = { $inc: { upvotes: 1 } };
@@ -41,6 +43,8 @@ app.post("/api/article/:name/upvotes", (req, res) => {
 
 //comments routiung
 app.post('/api/article/:name/comments',(req,res)=>{
+  res.header("Access-Control-Allow-Origin","*");
+  res.header("Access-Control-Allow-Methods:GET , POST ,PUT , DELETE",);
     const { name } = req.params;
     const { username,text } = req.body;
     const filter = { name: name };
