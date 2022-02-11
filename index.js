@@ -22,16 +22,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get("/api/article/:name", async (req, res) => {
- 
-  const { id } = req.params;
-  try {
-    const result = await ArticleInfo.findOne({name:id});
-    return res.status(200).json(result);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-});
+
 
 app.post("/api/article/:name/upvotes", (req, res) => {
   try {
@@ -60,6 +51,17 @@ app.post('/api/article/:name/comments',(req,res)=>{
     .then(function (article) {
       res.json(article);
     });
+});
+
+app.get("/api/article/:name", async (req, res) => {
+ 
+  const { id } = req.params;
+  try {
+    const result = await ArticleInfo.findOne({name:id});
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
 });
 
 app.get('*', function(req, res) {
