@@ -34,13 +34,19 @@ app.get("/api/article/:name", async (req, res) => {
 });
 
 app.post("/api/article/:name/upvotes", (req, res) => {
-  const { name } = req.params;
+  try {
+    console.log("post entered");
+    const { name } = req.params;
   const filter = { name: name };
   const update = { $inc: { upvotes: 1 } };
   ArticleInfo.findOneAndUpdate(filter, update, { new: true })
   .then(function (article) {
     res.json(article);
   });
+  } catch (error) {
+    console.log(error);
+  }
+  
 });
 
 //comments routiung
@@ -56,7 +62,7 @@ app.post('/api/article/:name/comments',(req,res)=>{
     });
 });
 
-app.get('/*', function(req, res) {
+app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname + '/build/index.html'));
  });
 
