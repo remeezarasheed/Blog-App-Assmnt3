@@ -57,6 +57,7 @@ app.get("/api/article/:name", async (req, res) => {
  
   const { id } = req.params;
   try {
+    console.log("helooiii");
     const result = await ArticleInfo.findOne({name:id});
     return res.status(200).json(result);
   } catch (error) {
