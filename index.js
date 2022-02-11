@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require('cors');
 const path = require('path');
-
+const port = process.env.PORT || 5000;
 
 
 const ArticleInfo = require("./src/model/BlogDB");
@@ -16,10 +16,14 @@ app.use(express.json());
 
 
  
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", '*');
+  res.header("Acess-Control-Allow-Methods:GET,POST,PATCH,PUT,DELETE,OPTIONS");
+  next();
+});
 
 app.get("/api/article/:id", async (req, res) => {
-  res.header("Access-Control-Allow-Origin","*");
-  res.header("Access-Control-Allow-Methods:GET , POST ,PUT , DELETE",);
+ 
   const { id } = req.params;
   try {
     const result = await ArticleInfo.findOne({name:id});
@@ -30,8 +34,7 @@ app.get("/api/article/:id", async (req, res) => {
 });
 
 app.post("/api/article/:name/upvotes", (req, res) => {
-  res.header("Access-Control-Allow-Origin","*");
-  res.header("Access-Control-Allow-Methods:GET , POST ,PUT , DELETE",);
+  
   const { name } = req.params;
   const filter = { name: name };
   const update = { $inc: { upvotes: 1 } };
@@ -43,8 +46,7 @@ app.post("/api/article/:name/upvotes", (req, res) => {
 
 //comments routiung
 app.post('/api/article/:name/comments',(req,res)=>{
-  res.header("Access-Control-Allow-Origin","*");
-  res.header("Access-Control-Allow-Methods:GET , POST ,PUT , DELETE",);
+  
     const { name } = req.params;
     const { username,text } = req.body;
     const filter = { name: name };
