@@ -9,7 +9,7 @@ const ArticleInfo = require("./src/model/BlogDB");
 //object initialization
 const app = express();
 app.use(cors());
-app.use(express.static('./build/'));
+app.use(express.static('./build'));
 //instead of body parser....to get content from the body(for post method)
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
