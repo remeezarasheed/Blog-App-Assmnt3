@@ -55,10 +55,10 @@ app.post('/api/article/:name/comments',(req,res)=>{
 
 app.get("/api/article/:name", async (req, res) => {
  
-  const { id } = req.params;
+  const { name } = req.params;
   try {
     console.log("helooiii");
-    const result = await ArticleInfo.findOne({name:id});
+    const result = await ArticleInfo.findOne({name:name});
     return res.status(200).json(result);
   } catch (error) {
     return res.status(500).json({ message: error.message });
