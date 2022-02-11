@@ -1,0 +1,9 @@
+GET http://localhost:5000/
+Content-Type: application/json
+###post method
+POST http://localhost:5000/
+Content-Type: application/json
+
+{
+    "name" :"anna"
+}
